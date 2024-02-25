@@ -1,87 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Валентинка с мишкой</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-    }
-    .valentine-card {
-        margin: 50px auto;
-        padding: 20px;
-        width: 300px;
-        background-color: #ffe6ea;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-    }
-    .valentine-card h2 {
-        color: #ff4d6d;
-    }
-    .bear {
-        margin-top: 20px;
-        position: relative;
-    }
-    .yes {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #ff4d6d;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: transform 0.3s ease;
-    }
-    .no {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #ddd;
-        color: #333;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    .yes:hover {
-        transform: scale(1.1);
-    }
-    .enlarging-yes {
-        font-size: 16px;
-        transition: font-size 0.3s ease;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валентинка с мишкой</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .valentine-card {
+            margin: 50px auto;
+            padding: 20px;
+            width: 300px;
+            background-color: #ffe6ea;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .valentine-card h2 {
+            color: #ff4d6d;
+        }
+
+        .bear {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .yes {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4d6d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .no {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .yes:hover {
+            transform: scale(1.1);
+        }
+
+        .enlarging-yes {
+            font-size: 16px;
+            transition: font-size 0.3s ease;
+        }
+    </style>
 </head>
+
 <body>
-<div class="valentine-card">
-    <h2>Будешь моей валентинкой?</h2>
-    <div class="bear">
-        <img src="https://i.pinimg.com/564x/6b/6c/20/6b6c20838c06f74c30751c5bb7c363c1.jpg" alt="Мишка" width="200px">
+    <div class="valentine-card">
+        <h2>Будешь моей валентинкой?</h2>
+        <div class="bear">
+            <img src="https://i.pinimg.com/564x/6b/6c/20/6b6c20838c06f74c30751c5bb7c363c1.jpg" alt="Мишка"
+                width="200px">
+        </div>
+        <button class="yes">Да</button>
+        <button class="no">Нет</button>
     </div>
-    <button class="yes">Да</button>
-    <button class="no">Нет</button>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <script>
+        const yesButton = document.querySelector('.yes');
+        const noButton = document.querySelector('.no');
+        const yesText = document.querySelector('.yes');
 
-<script>
-    const yesButton = document.querySelector('.yes');
-    const noButton = document.querySelector('.no');
-    const yesText = document.querySelector('.yes');
+        let fontSize = 16;
 
-    let fontSize = 16;
+        yesButton.addEventListener('click', function () {
+            const duration = 15 * 1000,
+                animationEnd = Date.now() + duration,
+                defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-    yesButton.addEventListener('click', function() {
-        alert('Ураааааааа! Пошли в pacman, а потом фильм смотреть');
-    });
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
 
-    noButton.addEventListener('click', function() {
-        fontSize += 2;
-        yesText.style.fontSize = fontSize + 'px';
-    });
-</script>
+            const interval = setInterval(function () {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+
+                // since particles fall down, start a bit higher than random
+                confetti(
+                    Object.assign({}, defaults, {
+                        particleCount,
+                        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    })
+                );
+                confetti(
+                    Object.assign({}, defaults, {
+                        particleCount,
+                        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    })
+                );
+            }, 250);
+            alert('Ураааааааа! Пошли в pacman, а потом фильм смотреть');
+        });
+
+        noButton.addEventListener('click', function () {
+            fontSize += 2;
+            yesText.style.fontSize = fontSize + 'px';
+        });
+    </script>
 </body>
+
 </html>
