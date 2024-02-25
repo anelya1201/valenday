@@ -92,37 +92,134 @@
             function randomInRange(min, max) {
                 return Math.random() * (max - min) + min;
             }
+            const end = Date.now() + 15 * 1000;
 
-            const interval = setInterval(function () {
-                const timeLeft = animationEnd - Date.now();
+            // go Buckeyes!
+            const colors = ["#bb0000", "#ffffff"];
 
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors,
+                });
+
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors,
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
                 }
-
-                const particleCount = 50 * (timeLeft / duration);
-
-                // since particles fall down, start a bit higher than random
-                confetti(
-                    Object.assign({}, defaults, {
-                        particleCount,
-                        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-                    })
-                );
-                confetti(
-                    Object.assign({}, defaults, {
-                        particleCount,
-                        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-                    })
-                );
-            }, 250);
+            })();
             alert('Ураааааааа! Пошли в pacman, а потом фильм смотреть');
         });
 
         noButton.addEventListener('click', function () {
-            fontSize += 2;
+            fontSize += 5;
             yesText.style.fontSize = fontSize + 'px';
+            confetti({
+            spread: 360,
+            ticks: 200,
+            gravity: 1,
+            decay: 0.94,
+            startVelocity: 30,
+            particleCount: 100,
+            scalar: 3,
+            shapes: ["image"],
+            shapeOptions: {
+                image: [{
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                {
+                    src: "https://i.pinimg.com/564x/b5/cf/0f/b5cf0fd78690c51329c8c6d2c43919de.jpg",
+                    width: 32,
+                    height: 32,
+                },
+                ],
+            },
         });
+        });
+
+        
     </script>
 </body>
 
